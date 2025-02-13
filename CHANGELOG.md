@@ -1,5 +1,10 @@
 # Changelog JVCForumRollback
 
+## [6.9.0] (13/02/2025)
+
+- Sauf exception, le bloc forum tendance => Affiche désormais le logo de jeuxvideo.com en fond.
+- Ça évite les soucis de ratio des jaquettes.
+
 ## [6.8.3] (12/02/2025)
 
 - **Anulation de la mise à jour 6.8.0**
