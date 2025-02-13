@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         JVCForumRollback
 // @namespace    https://github.com/Roadou
-// @version      6.8.3
+// @version      6.9.0
 // @description  Ancienne page des forums JVC
 // @author       IceFairy, Atlantis
 // @match        *://www.jeuxvideo.com/forums.htm
@@ -23,12 +23,24 @@ const elements = document.querySelectorAll('.card__imgGame + .card__body .card__
 const jaquettetopjeu = document.querySelector('.card__imgGame img');
 const jaquettetopjeuimgbase = jaquettetopjeu.getAttribute('data-src') || jaquettetopjeu.getAttribute('src');
 let jaquettetopjeuimg = jaquettetopjeuimgbase.replace('medias-xs', 'medias-md');
+let jaquettetopjeucss = 'height: 100%; object-fit: cover;';
+
+//execeptions_fiches_jeux_css(va_chercher_une_autre_image_sinon_cest_moche)____
+//LOL-KCD2
+jaquettetopjeucss = 
+    ((jaquettetopjeuimg === 'https://image.jeuxvideo.com/medias-md/171491/1714911849-7156-jaquette-avant.jpg') || 
+    (jaquettetopjeuimg === 'https://image.jeuxvideo.com/medias-md/171346/1713464229-1879-jaquette-avant.jpg')) 
+    ? '' : jaquettetopjeucss;
 
 //execeptions_fiches_jeux(va_chercher_une_autre_image_sinon_cest_moche)____
-//football
-jaquettetopjeuimg = (jaquettetopjeuimg === 'https://image.jeuxvideo.com/medias-md/171466/1714656797-9405-jaquette-avant.png') ? 'https://cdn2.unrealengine.com/football-manager-2024-s-miles-jacobson-talks-past-present-and-future-of-the-football-sim-1920x1080-ec8779b5d071.jpeg' : jaquettetopjeuimg;
-//Kingdom_Come_Deliverance 2
-jaquettetopjeuimg = (jaquettetopjeuimg === 'https://image.jeuxvideo.com/medias-md/171346/1713464229-1879-jaquette-avant.jpg') ? 'https://image.jeuxvideo.com/medias-md/172426/1724264786-8139-capture-d-ecran.jpg' : jaquettetopjeuimg;
+//GI-LOL-FM24-KCD2
+jaquettetopjeuimg = 
+    (jaquettetopjeuimg === 'https://image.jeuxvideo.com/medias-md/163299/1632994028-1028-jaquette-avant.png') ? jaquettetopjeuimg :
+    (jaquettetopjeuimg === 'https://image.jeuxvideo.com/medias-md/171491/1714911849-7156-jaquette-avant.jpg') ? jaquettetopjeuimg :
+    (jaquettetopjeuimg === 'https://image.jeuxvideo.com/medias-md/171466/1714656797-9405-jaquette-avant.png') ? 'https://cdn2.unrealengine.com/football-manager-2024-s-miles-jacobson-talks-past-present-and-future-of-the-football-sim-1920x1080-ec8779b5d071.jpeg' :
+    (jaquettetopjeuimg === 'https://image.jeuxvideo.com/medias-md/171346/1713464229-1879-jaquette-avant.jpg') ? 'https://image.jeuxvideo.com/medias-md/172426/1724264786-8139-capture-d-ecran.jpg' :
+    'https://image.jeuxvideo.com/medias-md/157322/1573218277-2396-card.png';
+
 
 //recuperer_le_bloc_de_fin
 const footer = page.querySelector(".layout__row.layout__footer");
@@ -399,8 +411,7 @@ var oldHtmlCode =
             <div class="forum-section">
               <div class="f-alaune">
                   <a href="#">
-                    <img src=${jaquettetopjeuimg}>
-                    <!-- <img src="https://static.jvc.gg/unversioned/img/default-og.png" style="height: 100%; object-fit: cover; filter: grayscale(25%) brightness(107%);">  -->
+                    <img src=${jaquettetopjeuimg} style="${jaquettetopjeucss}">
                   <p class="nom-forum">${titles[0]}</p>
                 </a></div>
             </div>
